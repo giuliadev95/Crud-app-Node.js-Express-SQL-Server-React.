@@ -1,30 +1,26 @@
 import { v4 as uuidv4 } from 'uuid';
 
-let users = [ ]
+let users = []
 
 // GET ALL USERS
-export const getAllUsers = (req, res) => {
-    for (const unit in users) {
-        console.log(typeof unit, unit.toString());
-    }
-    console.log(users);
-   
-
-    console.log(typeof users);
-    // Forse devo rendere questa una new instance della classe users che
-    // è fatta di users e data
-
+export const getAllUsers = (req, res,next) => {
+    res.send(users)   
+   // Class Utenti: dati is an array that wraps the all users object
     class Utenti {
         constructor(dati){
             this.dati = users
+            this.codice = res.statusCode
         }
     }
+    // Istanza singolo_utente
     let utente_campione = new Utenti("dati");
-    console.log(utente_campione, " ha tipo: ", typeof utente_campione);
-    /*let stato = res.status();
-    console.log(stato._header)
-    let header = stato.header
-    for (code_unit in header){console.log(code_unit[0])}*/
+    for (const [key,value] of Object.entries(utente_campione)) {
+        console.log(key, ":", value);
+    } 
+
+    // var http_ok_code = 200;
+    // if(res === http_ok_code){console.log("200")}else{console.log("Unknown code")}
+
 }
 
 // GET USER BY ID
