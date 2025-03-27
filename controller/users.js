@@ -27,6 +27,15 @@ export const getAllUsers = (req, res) => {
     for (code_unit in header){console.log(code_unit[0])}*/
 }
 
+// GET USER BY ID
+export const getUserById = (req, res) =>{
+    const {id} = req.params;
+
+    const userTrovato = users.find((user)=> user.id == id);
+
+    res.send(userTrovato);
+}
+
 
 // POST NEW USER
 export const insertUser = (req, res)=> {
