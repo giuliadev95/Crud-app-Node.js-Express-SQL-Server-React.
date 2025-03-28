@@ -3,24 +3,50 @@ import { v4 as uuidv4 } from 'uuid';
 let users = []
 
 // GET ALL USERS
-export const getAllUsers = (req, res,next) => {
+export const getAllUsers = (req, res) => {
     res.send(users)   
-   // Class Utenti: dati is an array that wraps the all users object
+   // Class : Utenti
     class Utenti {
-        constructor(dati){
-            this.dati = users
-            this.codice = res.statusCode
+        constructor(nome, cognome, email, id, codice){
+           //this.dati = {"Dati dell'utente": users, "codice": res.statusCode}
+           this.nome = nome;
+           this.cognome = cognome;
+           this.email = email;
+           this.id = id;
+           this.codice = codice;
+            //this.codice = res.statusCode // print the status code as well as a *property* of this Class
         }
     }
-    // Istanza singolo_utente
-    let utente_campione = new Utenti("dati");
-    for (const [key,value] of Object.entries(utente_campione)) {
-        console.log(key, ":", value);
-    } 
+    // Istanc : singolo_utente
+    users.forEach((user)=>{
 
-    // var http_ok_code = 200;
-    // if(res === http_ok_code){console.log("200")}else{console.log("Unknown code")}
+        let utente_campione = new Utenti(user.nome, user.cognome, user.email, user.id, res.statusCode);
+        for (const [key,value] of Object.entries(utente_campione)) {
+            console.log(key, ":", value);
+            /* Output:
 
+            1) OLD OUTPUT BEFORE LAST COMMIT
+                dati : [
+                    {
+                        nome: 'Alex',
+                        cognome: 'Bartolini',
+                        email: 'alexbartolini@gmail.com'
+                        id: 'xxxxx'
+                        }
+                        ]
+                        codice : 200
+
+                2) NEW OUTPUT AFTER LAST COMMIT
+                {
+                    nome : "Alex",
+                    cognome : "Bartolini",
+                    email: "email",
+                    id: "string_id",
+                    codice : 200 (number: int data type)
+                }         
+            */
+        } 
+    })
 }
 
 // GET USER BY ID
@@ -41,6 +67,7 @@ export const insertUser = (req, res)=> {
     users.push( {...user, id: userID} );
    
     res.send("L'utente con email: " + (user.email) + " e con id:" + (userID) + "è stato aggiunto con successo.");
+    
     
 }
 
