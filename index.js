@@ -1,29 +1,70 @@
 import express from "express"
 import usersRoutes from "./routes/users.js"
-
-// L'import funzione perchè attribuisce un nome 
-// arbitrario all'oggetto router, leggendo l'ultima riga di users.js:
-// export default router, che è => const router = expressmRouter(),
-// quindi un metodo express
+import cors from 'cors'
+import path from 'path';
+import { fileURLToPath } from 'url';
+// import json persone
+import  {persone } from './persone.js';
 
 const app = express(); // funzionalità di express agganciate alla costante app
 const PORT = "5000";
-
-// middleware per formattare in json il req.body del console.log
-// in Terminale
 app.use(express.json());
+app.use(cors());
+app.use(express.static('public'));
+const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+const __dirname = path.dirname(__filename); // get the name of the directory
 
-// chiamata get alla home localhost:5000
-app.get('/', (req, res)=> res.send("Benvenuto nella homepage"));
+// '/homepage.html'
+app.get('/', (req, res)=> {
+    res.sendFile('homepage.html', { 
+        root:__dirname + "/public"
+    })
+});
 
-// chiamata get alla users page :5000/users
+app.get( '/contatti', (req, res)=> {
+    res.sendFile('contatti.html', {
+        root:__dirname + "/public"
+    })
+});
 app.use('/users', usersRoutes);
 
 
+ '/persone'
+app.get('/persone', (req, res) =>{
+    const nuovePersone = persone.map((persona)=>{
+        const { nome, cognome, indirizzo} = persona
+        return {nome, cognome, indirizzo}
+    })
+    res.json(nuovePersone);
+});
+
+
+app.get('/persone/:id', (req, res) => {
+    console.log(req.params);
+    const {id} = req.params;
+    const persona = persone.find((persona) => persona.id === Number(id));
+    
+    if(!persona) {
+        return res.send('Contatto non trovato');
+    }
+    res.json(persona);
+});
+
+app.get('/contatti/search', (req,res)=>{
+    console.log(req.query);
+    res.send('ciao')
+})
+
+
+app.get('*', (req, res)=>{
+    res.sendFile('404.html', {
+        root:__dirname + "/public"
+    });
+
+
+});
 app.listen(PORT, ()=> {
     console.log('I\'m listening');   
 });
 
-
-
-
+        

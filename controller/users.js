@@ -4,7 +4,7 @@ let users = []
 
 // GET ALL USERS
 export const getAllUsers = (req, res) => {
-    res.send(users)   
+    res.send(users);
 
    // Class : Utenti
     class Utenti {
@@ -19,41 +19,17 @@ export const getAllUsers = (req, res) => {
 
     // Instance : singolo_utente
     users.forEach((user)=>{
-
         let utente_campione = new Utenti(user.nome, user.cognome, user.email, user.id, res.statusCode);
         for (const [key,value] of Object.entries(utente_campione)) {
             console.log(key, ":", value);
         } 
-
-        /* Output:
-        1) OLD OUTPUT BEFORE LAST COMMIT
-            dati : [
-                {
-                    nome: 'Alex',
-                    cognome: 'Bartolini',
-                    email: 'alexbartolini@gmail.com'
-                    id: 'xxxxx'
-                    }
-                    ]
-                    codice : 200
-            2) NEW OUTPUT AFTER LAST COMMIT
-            {
-                nome : "Alex",
-                cognome : "Bartolini",
-                email: "email",
-                id: "string_id",
-                codice : 200 (number: int data type)
-            }         
-        */
     });
 }
 
 // GET USER BY ID
 export const getUserById = (req, res) =>{
     const {id} = req.params;
-
     const userTrovato = users.find((user)=> user.id == id);
-
     res.send(userTrovato);
 }
 
@@ -62,12 +38,8 @@ export const getUserById = (req, res) =>{
 export const insertUser = (req, res)=> {
     const user = req.body;
     const userID = uuidv4();
-
     users.push( {...user, id: userID} );
-   
-    res.send("L'utente con email: " + (user.email) + " e con id:" + (userID) + "è stato aggiunto con successo.");
-    
-    
+    res.send("L'utente con email: " + (user.email) + " e con id:" + (userID) + "è stato aggiunto con successo.");    
 }
 
 // UPDATE USER BY ID
@@ -79,7 +51,6 @@ export const updateUser = (req, res)=>{
     if(nome) userTrovato.nome = nome;
     if(cognome) userTrovato.cognome = cognome;
     if (email) userTrovato.email = email;
-
     res.send(id + " modificato.")
 }
 
