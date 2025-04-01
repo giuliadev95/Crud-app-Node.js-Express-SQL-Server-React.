@@ -5,5 +5,13 @@
   text-align: center;
 }
 
+li {
+  color: rgb(10, 10, 10);
+  padding: 2px;
+  background-color: rgb(246, 241, 241);
+  list-style: none;
+  border-bottom: 2px solid rgb(5, 5, 5);
+}
+
 
 
