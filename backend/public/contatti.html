@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatti</title>
+</head>
+<body>
+    <h1>Contatti</h1>
+    <div class="parent_container">
+        <!-- Fetched contacts here -->
+    </div>
+    <a href="./homepage.html"> Home </a>
+    <script>
+        fetch("http://localhost:5000/users")
+        .then(response => response.json())
+        .then(contatti_data => {
+            console.log(contatti_data); // Log the data for debugging purposes
+
+            const parentContainer = document.querySelector('.parent_container'); // Select the parent container
+
+            // Iterate over the user data
+            contatti_data.forEach((singolo_contatto) => {
+                const { nome, cognome, email, id } = singolo_contatto;
+
+                // Create a new <ul> for each user
+                const ul = document.createElement('ul');
+                ul.classList.add('user-list'); // Optional: Add a class for styling
+
+                // Create <li> elements for each property
+                const liNome = document.createElement('li');
+                liNome.innerText = `Nome: ${nome}`;
+                ul.appendChild(liNome);
+
+                const liCognome = document.createElement('li');
+                liCognome.innerText = `Cognome: ${cognome}`;
+                ul.appendChild(liCognome);
+
+                const liEmail = document.createElement('li');
+                liEmail.innerText = `Email: ${email}`;
+                ul.appendChild(liEmail);
+
+                const liId = document.createElement('li');
+                liId.innerText = `ID: ${id}`;
+                ul.appendChild(liId);
+
+                // Append the <ul> to the parent container
+                parentContainer.appendChild(ul);
+            });
+        })
+        .catch(error => console.error("Error fetching data:", error));
+    </script>
+</body>
+</html>

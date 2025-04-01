@@ -2,11 +2,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 let users = []
 
-// GET ALL USERS
+// GET ALL USERS AND FORMAT THE DATA AS A JSON ARRAY OF OBJECTS
 export const getAllUsers = (req, res) => {
     res.send(users);
 
-   // Class : Utenti
+   // CREATE THE CLASS : "Utenti" 
     class Utenti {
         constructor(nome, cognome, email, id, codice){
            this.nome = nome;
@@ -17,7 +17,7 @@ export const getAllUsers = (req, res) => {
         }
     }
 
-    // Instance : singolo_utente
+    // CREATE AN INSTANCE OF THE CLASS "Utenti" CALLED : "utente_campione". STORE EACH OBJECT IN A "utente_campione" OBJECT
     users.forEach((user)=>{
         let utente_campione = new Utenti(user.nome, user.cognome, user.email, user.id, res.statusCode);
         for (const [key,value] of Object.entries(utente_campione)) {
@@ -25,6 +25,9 @@ export const getAllUsers = (req, res) => {
         } 
     });
 }
+
+
+// The code down below is not used at the moment
 
 // GET USER BY ID
 export const getUserById = (req, res) =>{
@@ -60,3 +63,4 @@ export const deleteUser = (req, res)=>{
     res.send('Utente con ID' + id + " è stato eliminato con successo.");
     console.log('Utente con ID' + id + " è stato eliminato con successo.");
 }
+
