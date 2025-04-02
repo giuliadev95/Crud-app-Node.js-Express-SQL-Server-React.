@@ -8,33 +8,5 @@
 <body>
     <h1>Home</h1>
     <a href="./contatti.html">Contatti </a>
-    <!--  Fetched data 
-        <ul>
-        </ul>
-    -->
-    <!--
-        <script>
-            fetch("http://localhost:5000/users")
-                .then(response => response.json())
-                .then(data => { 
-                    const articoli = data.map(articolo => {
-                    return (`
-                            ${articolo.nome},
-                            ${articolo.cognome},
-                            ${articolo.email},
-                            ${articolo.id},
-                            `)
-                })
-                const list = document.querySelector("ul")
-                                articoli.forEach((articolo)=> {
-                                    const list_item = document.createElement("li")
-                                    list_item.textContent = articolo
-                                    list.appendChild(list_item)
-                                });
-                console.log(typeof articoli)
-                console.log(articoli.join("", ""))           
-                })
-        </script>
-    -->
 </body>
 </html>

@@ -35,3 +35,6 @@ This is the Codegrind italian course : Creare API con Nodejs + Express
         })
 
 ```
+
+## Doc for Fetching with React
+https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/ 

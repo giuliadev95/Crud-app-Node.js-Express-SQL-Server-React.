@@ -1,5 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
+import { poolPromise } from '../config/db.js';
 
+
+
+/*
 let users = []
 
 // GET ALL USERS AND FORMAT THE DATA AS A JSON ARRAY OF OBJECTS
@@ -25,9 +29,30 @@ export const getAllUsers = (req, res) => {
         } 
     });
 }
+*/
+
+export const getAllUsers = async (req, res) => {
+    try {
+      const pool = await poolPromise;
+      const result = await pool.request().query("SELECT * FROM Contatti");
+      res.status(200).json(result.recordset); // send the data
+      console.log(result.recordset);
+      result.recordset.forEach((dato)=>{
+        const {Id, Nome, Cognome, Email} = dato;
+        console.log ( Id, Nome, Cognome, Email)
+      })
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Errore nel recupero Contatti"); 
+    }
+
+  };
+
 
 
 // The code down below is not used at the moment
+
+
 
 // GET USER BY ID
 export const getUserById = (req, res) =>{
