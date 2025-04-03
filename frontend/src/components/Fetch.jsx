@@ -11,8 +11,8 @@ const Fetch = () => {
             return res.json();
         })
         .then((data) => {
-            console.log(data);
             setContacts(data);
+            console.log(data);
             console.log(typeof data);
         });
     },[]);
@@ -20,11 +20,11 @@ const Fetch = () => {
     return (
         <div>
             {contacts.map((contact) => (  
-                <ul>
-                    <li key={contact.Id}> Id : {contact.Id}</li>
-                    <li key={contact.Nome}>Nome : {contact.Nome}</li>
-                    <li key={contact.Cognome}>Cognome : {contact.Cognome}</li>
-                    <li key={contact.Email}>E-mail: {contact.Email}</li>
+                <ul key={contact.Id}>
+                    <li> Id : {contact.Id}</li>
+                    <li>Nome : {contact.Nome}</li>
+                    <li>Cognome : {contact.Cognome}</li>
+                    <li>E-mail: {contact.Email}</li>
                 </ul>
             ))}
         </div>

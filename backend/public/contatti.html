@@ -21,7 +21,7 @@
 
             // Iterate over the user data
             contatti_data.forEach((singolo_contatto) => {
-                const { nome, cognome, email, id } = singolo_contatto;
+                const { Nome, Cognome, Email, Id } = singolo_contatto;
 
                 // Create a new <ul> for each user
                 const ul = document.createElement('ul');
@@ -29,19 +29,19 @@
 
                 // Create <li> elements for each property
                 const liNome = document.createElement('li');
-                liNome.innerText = `Nome: ${nome}`;
+                liNome.innerText = `Nome: ${Nome}`;
                 ul.appendChild(liNome);
 
                 const liCognome = document.createElement('li');
-                liCognome.innerText = `Cognome: ${cognome}`;
+                liCognome.innerText = `Cognome: ${Cognome}`;
                 ul.appendChild(liCognome);
 
                 const liEmail = document.createElement('li');
-                liEmail.innerText = `Email: ${email}`;
+                liEmail.innerText = `Email: ${Email}`;
                 ul.appendChild(liEmail);
 
                 const liId = document.createElement('li');
-                liId.innerText = `ID: ${id}`;
+                liId.innerText = `ID: ${Id}`;
                 ul.appendChild(liId);
 
                 // Append the <ul> to the parent container

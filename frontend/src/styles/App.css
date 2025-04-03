@@ -17,5 +17,20 @@ a {
   padding: 10px;
 }
 
+form {
+  display:flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+input{ margin-bottom:2px;}
+
+button {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
 
