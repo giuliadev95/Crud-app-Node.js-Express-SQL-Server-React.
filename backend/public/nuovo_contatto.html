@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuovo contatto</title>
+</head>
+<body>
+    <h1>Inserisci un nuovo contatto</h1>
+    <form id="form">
+        <input type="text" name="nome" placeholder="Nome: " required id="nome"/>
+        <input type="text" name="cognome" placeholder="Cognome: " required id="cognome"/>
+        <input type="text" name="email" placeholder="Email: " required id="email"/>
+        <button type="submit">Invia</button>
+    </form>
+
+    <script>
+        // take the form and each form's input by id
+        const form = document.getElementById('form');
+        const inputNome = document.getElementById('nome');
+        const inputCognome = document.getElementById('cognome');
+        const inputEmail = document.getElementById('email');
+        
+        // prevent default refresh when submit-button is clicked
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // take the inputs' values by id
+            const contatto_nome = inputNome.value;
+            const contatto_cognome = inputCognome.value;
+            const contatto_email = inputEmail.value;
+            
+            // Debugging: console.log() the values to ensure they've been taken
+            console.log(`Nome: ${contatto_nome}, type ${typeof contatto_nome}`);
+            console.log(`Cognome: ${contatto_cognome}, type ${typeof contatto_cognome}`);
+            console.log(`Email: ${contatto_email}, type ${typeof contatto_email}`);
+
+            // create a class Nuovo_contatto with an instance that wrapps all input's values before sending them to the fetching-api
+            class Nuovo_contatto {
+                constructor(nome, cognome, email) {
+                    this.nome = nome,
+                    this.cognome = cognome,
+                    this.email = email
+                }
+            }
+            // instance here
+            const nuovo_contatto = new Nuovo_contatto(contatto_nome, contatto_cognome, contatto_email);
+            console.log(nuovo_contatto);
+
+            // Fetch with a POST method() all collected values to an Api : localhost:5000/api/nuovo-contatto
+           fetch('http://localhost:5000/api/contatti', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(nuovo_contatto)
+           })
+           .then(repsonse => response.json())
+           .then(result => {
+                if(!result){
+                    console.log(`There's no result`)
+                } else {
+                    console.log(result)
+                }
+           })
+           .catch(err => {
+            console.log(`There was an error in obtaining the result: ${result} `)
+           });
+            
+        });
+    </script>
+</body>
+</html>

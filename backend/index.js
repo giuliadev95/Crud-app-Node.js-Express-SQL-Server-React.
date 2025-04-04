@@ -1,8 +1,8 @@
-import express from "express"
-import usersRoutes from "./routes/users.js"
-import cors from 'cors'
+import express from "express";
+import usersRoutes from "./routes/users.js";
+import cors from 'cors';
 import path from 'path';
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'url';
 
 const app = express(); // funzionalità di express agganciate alla costante app
 const PORT = "5000";

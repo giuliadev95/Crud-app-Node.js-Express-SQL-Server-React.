@@ -1,8 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { poolPromise } from '../config/db.js';
 
-
-
 /*
 let users = []
 
@@ -69,6 +67,7 @@ export const insertUser = (req, res)=> {
     users.push( {...user, id: userID} );
     res.send("L'utente con email: " + (user.email) + " e con id:" + (userID) + "è stato aggiunto con successo.");    
 }
+
 
 // UPDATE USER BY ID
 export const updateUser = (req, res)=>{
