@@ -4,10 +4,10 @@ import '../styles/App.css';
 const AddContact = ()=> {
     // Create the class
     class nuovoContatto {
-        constructor(nome, cognome, email) {
-            this.nome = nome;
-            this.cognome = cognome;
-            this.email = email;
+        constructor(Nome, Cognome, Email) {
+            this.Nome = Nome;
+            this.Cognome = Cognome;
+            this.Email = Email;
         }
     }
     return(
