@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+//import { v4 as uuidv4 } from 'uuid';
 import { poolPromise } from '../config/db.js';
 
 /*
@@ -46,13 +46,12 @@ export const getAllUsers = async (req, res) => {
 
   };
 
+  // INSERT each New contact in the Azure sql db
 
+// The code down below refers to usage with Postman
 
-// The code down below is not used at the moment
-
-
-
-// GET USER BY ID
+/* 
+GET USER BY ID
 export const getUserById = (req, res) =>{
     const {id} = req.params;
     const userTrovato = users.find((user)=> user.id == id);
@@ -87,4 +86,4 @@ export const deleteUser = (req, res)=>{
     res.send('Utente con ID' + id + " è stato eliminato con successo.");
     console.log('Utente con ID' + id + " è stato eliminato con successo.");
 }
-
+*/

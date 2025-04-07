@@ -6,7 +6,7 @@ const Fetch = () => {
     const [ contacts, setContacts ] = useState([]);
 
     useEffect( ()=> {
-        fetch('http://localhost:5000/users/')
+        fetch('http://localhost:5000/api/')
         .then( (res)=> {
             return res.json();
         })

@@ -12,7 +12,7 @@
     </div>
     <a href="./homepage.html"> Home </a>
     <script>
-        fetch("http://localhost:5000/users")
+        fetch("http://localhost:5000/api")
         .then(response => response.json())
         .then(contatti_data => {
             console.log(contatti_data); // Log the data for debugging purposes
