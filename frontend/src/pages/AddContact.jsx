@@ -1,51 +1,52 @@
-import React from "react";
+import React, {useEffect} from "react";
 import '../styles/App.css';
 
 const AddContact = ()=> {
-    // Create the class
-    class nuovoContatto {
-        constructor(Nome, Cognome, Email) {
-            this.Nome = Nome;
-            this.Cognome = Cognome;
-            this.Email = Email;
-        }
-    }
+    // Use thew useEffect to access DOM elements by id
+    useEffect(()=>{
+        // take the form and each form's input by id
+        const form = document.getElementById('form');
+        const inputName = document.getElementById('nome');
+        const inputSurname = document.getElementById('cognome');
+        const inputEmail = document.getElementById('email');
+        
+        // prevent default refresh when submit-button is clicked
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // take the inputs' values by id
+            const contact_name = inputName.value;
+            const contact_surname = inputSurname.value;
+            const contact_email = inputEmail.value;
+            
+            // Debugging: console.log() the values to ensure they've been taken
+            console.log(`Nome: ${contact_name}, type ${typeof contact_name}`);
+            console.log(`Cognome: ${contact_surname}, type ${typeof contact_surname}`);
+            console.log(`Email: ${contact_email}, type ${typeof contact_email}`);
+
+            // create a class  with an instance that wrapps all input's values before sending them to the fetching-api
+            class New_contact {
+                constructor(nome, cognome, email) {
+                    this.nome = nome,
+                    this.cognome = cognome,
+                    this.email = email
+                }
+            }
+            // instance here
+            const new_contact = new New_contact(contact_name, contact_surname, contact_email);
+            console.log(new_contact);});       
+        },
+    []);
+
     return(
         <>
             <h1>Aggiungi nuovo contatto</h1>
             <form id="form">
-                <input type='text' name='nome' placeholder='Nome'/>
-                <input type='text' name='cognome' placeholder='Cognome'/>
-                <input type='text' name='email' placeholder='Email'/>
+                <input type='text' name='nome' placeholder='Nome' required id="nome"/>
+                <input type='text' name='cognome' placeholder='Cognome' required id="cognome"/>
+                <input type='text' name='email' placeholder='Email' required id="email"/>
                 <button type="submit">Aggiungi</button>
             </form>
-            {/**
-             * Nome
-             * Cognome
-             * Email
-             * ARRAY OF OBJECTS
-             * CLASS NEW CONTACT
-                * ={
-                    * Nome: '',
-                    * Cognome: '',
-                    * Email: ''
-            * }
-            * POST => METHOD()
-            * post newContact.nome = as value of Nome in the DB
-            * post newContact.cognome = as value of Cognome in the DB
-            * post newContact.email = as value of Email in the DB
-             * 
-             * 
-             * 1- THE CLIENT GETS FROM THE FRONTEND THE VALUES OF EACH PROPERTY'S KEY AND SENDS IT TO AN ENDPOINT :
-             * /nuovo-contatto-api
-             * 2- THE SERVER LISTENS TO THIS DATA AND FETCHES IT, TO SEND THEM IN THE AZURE DB
-             * 
-             * 
-             * 
-             * 
-             * 3- THE SERVER CAN NOW GET THE UPDATED SET OF DATA FROM THE DB WHEN /contatti page is refresh or visited
-             * 
-             */}
         </>
     )
 }

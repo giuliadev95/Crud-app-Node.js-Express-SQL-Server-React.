@@ -1,7 +1,7 @@
 //import { v4 as uuidv4 } from 'uuid';
 import { poolPromise } from '../config/db.js';
 
-// get() from localhost:5000/api
+// GET METHOD : get() from localhost:5000/api
 export const getAllUsers = async (req, res) => {
     try {
         const pool = await poolPromise;
@@ -16,10 +16,10 @@ export const getAllUsers = async (req, res) => {
         console.error(err);
         res.status(500).send("Errore nel recupero Contatti"); 
     }  
-};
+}
 
 
-// post() to localhost:5000/api/new
+// POST METHOD: post() to localhost:5000/api/new
 export const postNew = async (req, res) => {
     const { Nome, Cognome, Email } = req.body;
 
@@ -29,7 +29,7 @@ export const postNew = async (req, res) => {
                 Nome, Cognome, Email`
         });
     }
-    try{
+    try{ 
         const pool = await poolPromise;
         const query = `
             INSERT INTO Contatti (Nome, Cognome, Email)
@@ -48,3 +48,7 @@ export const postNew = async (req, res) => {
         res.status(500).send({ error: 'Failed to add contact to the database.' });
     }
 };
+
+// delete
+
+// update
