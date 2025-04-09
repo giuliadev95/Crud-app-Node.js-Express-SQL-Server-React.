@@ -26,15 +26,43 @@ const AddContact = ()=> {
 
             // create a class  with an instance that wrapps all input's values before sending them to the fetching-api
             class New_contact {
-                constructor(nome, cognome, email) {
-                    this.nome = nome,
-                    this.cognome = cognome,
-                    this.email = email
+                constructor(Nome, Cognome, Email) {
+                    this.Nome = Nome,
+                    this.Cognome = Cognome,
+                    this.Email = Email
                 }
             }
             // instance here
             const new_contact = new New_contact(contact_name, contact_surname, contact_email);
-            console.log(new_contact);});       
+            console.log(new_contact);
+            
+            
+            fetch('http://localhost:5000/api/', { // Error: url not found: http://localhost:5173/http://localhost:5000/api/
+                method: 'POST',
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(new_contact)
+            })
+            console.log(new_contact) // Is logging
+            const {Nome, Cognome, Email } = new_contact;
+            console.log(new_contact, 'is type of', typeof new_contact, 'and has: ', Nome, Cognome, Email)
+            // PROBLEM: new contact is undefined.
+            for(let dato in new_contact){
+                console.log(dato, 'is type of ', typeof dato)
+            };
+            for (const [key, value] of Object.entries(new_contact)) {
+                console.log(`${key}: ${value}`);}
+            
+
+            /*
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ new_contact})
+            };
+            fetch('http://localhost:5000/api/', requestOptions)
+            */
+
+        });       
         },
     []);
 

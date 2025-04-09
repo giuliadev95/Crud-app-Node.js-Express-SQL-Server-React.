@@ -6,6 +6,6 @@ const router = express.Router();
 // GET ALL USERS AT localhost:5000/api/
 router.get('/', getAllUsers);
 
-// POST A NEW USER TO localhost:5000/api/new
-router.post('/new', postNew);
+// POST A NEW USER TO localhost:5000/api/
+router.post('/', postNew);
 export default router;

@@ -21,15 +21,19 @@ export const getAllUsers = async (req, res) => {
 
 // POST METHOD: post() to localhost:5000/api/new
 export const postNew = async (req, res) => {
-    const { Nome, Cognome, Email } = req.body;
+    const new_contact = req.body;
 
-    if(!Nome || !Cognome || !Email) {
+    if(!new_contact) {
         return res.send({
             error: `A field or more are missing:
                 Nome, Cognome, Email`
         });
     }
-    try{ 
+    try{ const {Nome, Cognome, Email } = new_contact;
+    console.log(new_contact, 'is type of', new_contact )
+
+    
+
         const pool = await poolPromise;
         const query = `
             INSERT INTO Contatti (Nome, Cognome, Email)
