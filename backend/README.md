@@ -1,5 +1,6 @@
 # What's in this file
-This is the Codegrind italian course : Creare API con Nodejs + Express
+This project has been built following those steps:
+1- Coding along with the Codegrind italian course : "Creare API con Nodejs + Express", s0 a local API application built with node.js / express, tested with Postman
 
 ## Important queries
 ```javaScript
