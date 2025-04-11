@@ -1,4 +1,3 @@
-//import { v4 as uuidv4 } from 'uuid';
 import { poolPromise } from '../config/db.js';
 
 // GET METHOD : get() from localhost:5000/api
@@ -25,8 +24,7 @@ export const postNew = async (req, res) => {
 
     if(!new_contact) {
         return res.send({
-            error: `A field or more are missing:
-                Nome, Cognome, Email`
+            error: `The new_contact element is missing: nothing found to post in the database.`
         });
     }
     try{ const {Nome, Cognome, Email } = new_contact;
@@ -53,6 +51,42 @@ export const postNew = async (req, res) => {
     }
 };
 
-// delete
 
+    // GET METHOD : GET USER BY ID
+    export const getUserById = async (req,res)=> {
+        try {
+            const id_string = (req.params);
+            
+            if(id_string) {
+                console.log(id_string, 'has type of', typeof id_string); // id is an Object, need to iterate over it with Object.entries Key value
+                for (const [key, value] of Object.entries(id_string)) {
+                    console.log(`${key}: ${value}`);} // Logging : id : 4
+            } else {
+                    console.log('There\'s no id')
+            }
+            const id_number = parseInt(Object.values(id_string));
+            console.log(id_number, 'has now type of "int".');
+            const pool = await poolPromise;
+            const result = await pool.request().query(`SELECT * FROM Contatti WHERE Id = ${id_number} `); // there was an error: RequestError: Must declare the scalar variable "@id_number`
+           // res.status(200).json(result.recordset);
+            console.log(result.recordset);
+            /*   result.recordset : 
+            [ 
+                {
+                    Id: 72,
+                    Nome: 'Marco',
+                    Cognome: 'Rossi',
+                    Email: 'marco.rossi@virgilio.it'
+                }
+            ]
+            */
+            res.send(`The contact with ID = ${id_number} has been found successfully.`);
+    }
+    catch(err) {
+        console.error(`There was an error: ${err}`);
+        res.status(500).send(`There was an error while retrieving the contact by ID.`);
+    }
+}
+
+// delete
 // update
