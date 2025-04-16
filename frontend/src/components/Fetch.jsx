@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import '../styles/App.css'
 
 const Fetch = () => {
     const [ contacts, setContacts ] = useState([]); // Store all contacts fetched from the db with a get() 
@@ -27,30 +26,57 @@ const Fetch = () => {
     
     // RETURN:
     return (
-        <>
+        <>   
         <input 
                 type='text' 
-                placeholder='Search' 
+                placeholder='Cerca' 
                 id="searchBar" 
                 value = {input}
                 onChange = {(e) => setInput(e.target.value)}
-        />       
-        <div>
-            {filteredContacts.length > 0 ? (
-                filteredContacts.map((contact) => (  
-                    <ul key={contact.Id}>
-                        <li> Id : {contact.Id}</li>
-                        <li>Nome : {contact.Nome}</li>
-                        <li>Cognome : {contact.Cognome}</li>
-                        <li>E-mail: {contact.Email}</li>
-                    </ul>
-                ))
-            ) : (
-                <p>Nessun risultato</p>
-            )}
-        </div>
+        />   
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col"> Nome </th>
+                    <th scope="col"> Cognome </th>
+                    <th scope="col"> Email </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {filteredContacts.length > 0 ? (
+                    filteredContacts.map((contact) => (  
+                        <tr key={contact.Id}>
+                            <th scope="row"> {contact.Nome}</th>
+                            <td>{contact.Cognome}</td>
+                            <td>{contact.Email}</td>
+                        </tr>
+                    ))
+                ) : (
+                    <p>Nessun risultato</p>
+                )}
+            </tbody>
+        </table>
         </>
     );
 };
 
 export default Fetch;
+
+/**
+ *   <table>
+ *      <thead>
+ *          <tr>
+ *              <th scope="col"> Nome </th>
+ *              <th scope="col"> Cognome </th>
+ *              <th scope="col"> Email </th>
+ *          </tr>
+ *      </thead>
+ *      <tbody>
+ *          <th key = contact.Id > contact.map() => contact.Nome </th>
+ *          <td> contact.map => contact.Cognome </td>
+ *          <td> contact.map => contact.Email </td>   
+        </tbody>
+    </table>
+ * 
+ */
