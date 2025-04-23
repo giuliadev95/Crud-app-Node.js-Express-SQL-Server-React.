@@ -1,20 +1,23 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to internal routes without refreshing the page thanks to SPA
+import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
 
 const Fetch = () => {
     const [ contacts, setContacts ] = useState([]); // Store all contacts fetched from the db with a get() 
     const [input, setInput] = useState(""); // Store the search input value and handle the input change
-    // Fetch all contacts from the backend when the component mounts
+    const navigate = useNavigate(); // hook the redirecting useNavigate functionalities to the navigate variable
+    {/** 3 => 4 [ setContacts ] */}
     useEffect(()=> {
-        fetch("http://localhost:5000/api/")
+        fetch("http://localhost:5000/api/") // Fetch all contacts from the backend when the component mounts
         .then ( (response) => response.json() )
         .then( (data) => {
-            setContacts(data); // Store the fetched contacts here
-            console.log(data);
+            setContacts(data); // setContacts = data => DATA = CONTACTS (UPDATED AFTER DELETION)
+            console.log(data, typeof data); // [ { array of objects fetched from localhost:5000/api } ] , object
        })
        .catch((err) => console.error(`There was an error fetching contacts: ${err}`));
-
     },[]);
     
+    {/** 5 */}
     // Filter contacts based on the search input
     const filteredContacts = contacts.filter((contact) => {
         return (
@@ -23,26 +26,60 @@ const Fetch = () => {
             contact.Nome.toLowerCase().includes(input.toLowerCase())
         );
     });
+
+    {/** 2 */}
+    // DeleteContact function  
+    function deleteContact(id) {
+        if (!id) return console.error("ID mancante per l'eliminazione.");
     
-    // RETURN:
+        fetch(`http://localhost:5000/api/${id}`, {
+            method: "DELETE",
+        })
+        .then((res) => {
+            if (!res.ok) throw new Error("Errore durante l'eliminazione");
+            console.log(`Contatto con ID ${id} eliminato.`);
+            setContacts(contacts.filter((contact) => contact.Id !== id));
+        })
+        .catch((err) => console.error(`Errore: ${err}`));
+    }
+
+    function openForm() {
+        //window.location.href = "http://localhost:5173/nuovo-contatto"
+        navigate("/nuovo-contatto")
+    }
+    
+    
+    // return:
     return (
         <>   
+        {/** 1 */}
+        <div class="contacts-field-container">
         <input 
                 type='text' 
                 placeholder='Cerca' 
-                id="searchBar" 
+                class="searchBar" 
                 value = {input}
                 onChange = {(e) => setInput(e.target.value)}
-        />   
+                />   
+        {/** Button add new contact */}
+        <button 
+            type="button" 
+            class="add-new-contact"
+            onClick={ ()=> openForm()}
+            >
+            Aggiungi +
+        </button>
+        </div>
+        {/** 2 */}
         <table>
             <thead>
                 <tr>
                     <th scope="col"> Nome </th>
                     <th scope="col"> Cognome </th>
                     <th scope="col"> Email </th>
+                    <th scope="col"> Azioni</th>
                 </tr>
             </thead>
-
             <tbody>
                 {filteredContacts.length > 0 ? (
                     filteredContacts.map((contact) => (  
@@ -50,6 +87,16 @@ const Fetch = () => {
                             <th scope="row"> {contact.Nome}</th>
                             <td>{contact.Cognome}</td>
                             <td>{contact.Email}</td>
+                            <td>     {/** 2 */}
+                                <button
+                                type="button"
+                                id="delete"
+                                onClick={ ()=> deleteContact(contact.Id) } // with the onClick() function, this delete function gets executed after the fetching of the contacts
+                                >
+                                <AiTwotoneDelete/>
+                                </button>           
+                            </td>
+                            
                         </tr>
                     ))
                 ) : (
@@ -62,21 +109,3 @@ const Fetch = () => {
 };
 
 export default Fetch;
-
-/**
- *   <table>
- *      <thead>
- *          <tr>
- *              <th scope="col"> Nome </th>
- *              <th scope="col"> Cognome </th>
- *              <th scope="col"> Email </th>
- *          </tr>
- *      </thead>
- *      <tbody>
- *          <th key = contact.Id > contact.map() => contact.Nome </th>
- *          <td> contact.map => contact.Cognome </td>
- *          <td> contact.map => contact.Email </td>   
-        </tbody>
-    </table>
- * 
- */

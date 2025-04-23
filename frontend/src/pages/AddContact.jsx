@@ -50,8 +50,14 @@ const AddContact = ()=> {
                 console.log(dato, 'is type of ', typeof dato)
             };
             for (const [key, value] of Object.entries(new_contact)) {
-                console.log(`${key}: ${value}`);}
-        });       
+                console.log(`${key}: ${value}`);
+            }
+
+            // Add something to hook to the new contact id and display it in a dynamic separate route
+            
+            
+        });  
+
         },
     []);
 

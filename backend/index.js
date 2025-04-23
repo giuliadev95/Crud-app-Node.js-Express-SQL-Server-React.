@@ -9,10 +9,10 @@ const PORT = "5000";
 app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
-const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+//const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 
 app.get('/', (req,res)=>{
-    res.status(200).send({corpus:'This is the / directory'});
+    res.status(200).send({msg:'This is the Home directory at port 5000'});
 });
 
 // api page
