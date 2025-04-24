@@ -34,9 +34,7 @@ const AddContact = ()=> {
             }
             // instance here
             const new_contact = new New_contact(contact_name, contact_surname, contact_email);
-            console.log(new_contact);
-            
-            
+            console.log(new_contact); 
             fetch('http://localhost:5000/api/', { 
                 method: 'POST',
                 headers: { "Content-Type": "application/json"},
