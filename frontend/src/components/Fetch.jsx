@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate to redirect to internal routes without refreshing the page thanks to SPA
 import { AiTwotoneDelete } from "react-icons/ai"; // bin icon to delete a contact
+import { FaPen } from "react-icons/fa"; // pen to update a contact
+
 
 const Fetch = () => {
     const [ contacts, setContacts ] = useState([]); // Store all contacts fetched from the db with a get() 
@@ -47,6 +49,10 @@ const Fetch = () => {
         //window.location.href = "http://localhost:5173/nuovo-contatto"
         navigate("/nuovo-contatto")
     }
+
+    const openContactPage = (id) => {
+        navigate(`/modifica-contatto/${id}`);
+    }
     
     
     // return:
@@ -87,16 +93,23 @@ const Fetch = () => {
                             <th scope="row"> {contact.Nome}</th>
                             <td>{contact.Cognome}</td>
                             <td>{contact.Email}</td>
-                            <td>     {/** 2 */}
+                            <td class="update-delete-btn-container">     {/** 2 */}
                                 <button
                                 type="button"
                                 id="delete"
                                 onClick={ ()=> deleteContact(contact.Id) } // with the onClick() function, this delete function gets executed after the fetching of the contacts
                                 >
                                 <AiTwotoneDelete/>
-                                </button>           
-                            </td>
-                            
+                                </button>     
+                                <button
+                                type="button"
+                                id="update"
+                                onClick={ ()=> openContactPage(contact.Id) } // with the onClick() function, this delete function gets executed after the fetching of the contacts
+                                >
+                                <FaPen/>
+
+                                </button>         
+                            </td>      
                         </tr>
                     ))
                 ) : (

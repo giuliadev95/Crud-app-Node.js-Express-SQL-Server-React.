@@ -18,11 +18,12 @@ form {
 input{ margin-bottom:2px;}
 
 button {
-  width: 100px;
+  width: 70px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin: 0 2px;
 }
 
 .searchBar, .add-new-contact {
@@ -59,4 +60,8 @@ td {
   text-align: left;
 }
 
+.update-delete-btn-container {
+  display:flex;
+
+}
 

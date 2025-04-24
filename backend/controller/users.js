@@ -66,7 +66,6 @@ export const getUserById = async (req,res)=> {
         console.log(id_number, 'has now type of "int".');
         const pool = await poolPromise;
         const result = await pool.request().query(`SELECT * FROM Contatti WHERE Id = ${id_number} `); // there was an error: RequestError: Must declare the scalar variable "@id_number`
-        // res.status(200).json(result.recordset);
         console.log(result.recordset);
         /*   result.recordset : 
         [ 
@@ -85,8 +84,6 @@ catch(err) {
     res.status(500).send(`There was an error while retrieving the contact by ID.`);
 }
 }
-
-// delete
 
 // DELETE METHOD: delete() to localhost:5000/api/:id
 export const deleteUserById = async (req, res) => {
@@ -107,7 +104,7 @@ export const deleteUserById = async (req, res) => {
             return res.status(404).send({ message: `Nessun contatto con ID ${id} trovato.` });
         }
 
-        res.send({ message: `Contatto con ID ${id} eliminato con successo.` });
+        res.send({ message: `Contatto con ID ${id} eliminato con successo via Postman.` });
     } catch (err) {
         console.error(err);
         res.status(500).send({ error: 'Errore nell\'eliminazione del contatto.' });
@@ -115,4 +112,40 @@ export const deleteUserById = async (req, res) => {
 };
 
 
-// update
+// UPDATE METHOD
+export const updateContact = async (req, res) => {
+    const { id } = req.params;
+    const {Nome, Cognome, Email} = req.body;
+
+    if (!id) {
+        return res.status(400).send({ error: 'ID non fornito.' });
+    }
+    if (!Nome || !Cognome || !Email) {
+        return res.status(400).send({error : 'Mancano o il Nome, o il Cognome, o l\'Email'});
+    }
+
+    try {
+        const pool = await poolPromise;
+        const result = await pool
+            .request()
+            .input('Id', id)
+            .input('Nome', Nome)
+            .input('Cognome', Cognome)
+            .input('Email', Email)
+            .query(`
+                UPDATE Contatti
+                SET Nome = @Nome, Cognome = @Cognome, Email = @Email
+                WHERE Id = @Id;
+                `);
+
+        if (result.rowsAffected[0] === 0) {
+            return res.status(404).send({ message: `Nessun contatto con ID ${id} trovato.` });
+        }
+
+        res.send({ message: `Contatto con ID ${id} aggiornato con successo.` });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: 'Errore nell\'aggiornamento del contatto.' });
+    }
+}
+
