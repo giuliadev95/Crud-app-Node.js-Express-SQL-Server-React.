@@ -45,7 +45,7 @@ const Update = () => {
     }, [contact]);
 
 
-    // SAME EXACT LOGIC,ROM AddContact.jsx 
+    // SAME EXACT LOGIC,FROM AddContact.jsx
     // form on submit
       useEffect(()=>{
         // take the form and each form's input by id
@@ -53,7 +53,6 @@ const Update = () => {
         const inputName = document.getElementById('new-name');
         const inputSurname = document.getElementById('new-surname');
         const inputEmail = document.getElementById('new-email');
-
             
             // prevent default refresh when submit-button is clicked
             form.addEventListener("submit", function(event) {
