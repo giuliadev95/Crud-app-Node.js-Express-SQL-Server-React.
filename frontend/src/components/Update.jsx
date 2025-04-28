@@ -3,16 +3,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Update = () => {
-    // destructure the url array and extract the last value after / ,
-    // then incapsulate it in a variable { } as the "id"
+    //  ---- [0] const declaration ----
+    // Destructure the url array and extract the last value after / , then incapsulate it in a variable { } as the "id"
     const { id } = useParams(); 
     const navigate = useNavigate();
     const [contact, setContact] = useState({})
     const [newName, setNewname] = useState("");
     const [newSurname, setNewSurname] = useState("");
     const [newEmail, setNewEmail] = useState("");
-
-    // [2] fetch single contact's data right after the DOM has mounted
+    
+    // ---- [2] fetch single contact's data right after the DOM has mounted ----
     useEffect(() => {   
         axios
         .get(`http://localhost:5000/api/${id}`)
@@ -27,7 +27,7 @@ const Update = () => {
     }, [id]) 
     // Up here [id] is for re-rendering the component once the id is fetched
     
-    // [3] Console.log the re-rendered contact state
+    // ---- [3] Console.log the re-rendered contact state ----
     useEffect(() => {
         // create a class to wrap the contact found by id
         class ContactToUpdate {
@@ -44,28 +44,73 @@ const Update = () => {
            console.log("Got contact:", contactToUpdate);}
     }, [contact]);
 
-    const handleUpdate = (event) => {
-        event.preventDefault();
-        axios
-        .put(`http://localhost:5000/api/${id}`, values)
-        .then( response => {
-            console.log(`Contact updated successfully: ${response.data}`);
-            // Automatically redirect to the contacts table page "Contatti"
-            navigate("/contatti"); 
-        })
-       // .catch(error => console.log(`There was an error updating the contact's data: ${error}`));
-       .catch((error) => {
-        setError("Failed to update contact. Please try again.");
-        console.error(error);
-    });
-    }
 
+    // SAME EXACT LOGIC,ROM AddContact.jsx 
+    // form on submit
+      useEffect(()=>{
+        // take the form and each form's input by id
+        const form = document.getElementById('form');
+        const inputName = document.getElementById('new-name');
+        const inputSurname = document.getElementById('new-surname');
+        const inputEmail = document.getElementById('new-email');
+
+            
+            // prevent default refresh when submit-button is clicked
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+                
+                // take the inputs' values by id
+                const contact_name = inputName.value;
+                const contact_surname = inputSurname.value;
+                const contact_email = inputEmail.value;
+                
+                // Debugging: console.log() the values to ensure they've been taken
+                console.log(`Nome: ${contact_name}, type ${typeof contact_name}`);
+                console.log(`Cognome: ${contact_surname}, type ${typeof contact_surname}`);
+                console.log(`Email: ${contact_email}, type ${typeof contact_email}`);
     
-    // [1] the HTML body mounts first
+                // create a class  with an instance that wrapps all input's values before sending them to the post-fetching-api
+                class Updated_contact {
+                    constructor(Nome, Cognome, Email) {
+                        this.Nome = Nome,
+                        this.Cognome = Cognome,
+                        this.Email = Email
+                    }
+                }
+                // instance here
+                const new_contact = new Updated_contact(contact_name, contact_surname, contact_email);
+                console.log(new_contact); 
+                fetch(`http://localhost:5000/api/${id}`, { 
+                    method: 'PUT',
+                    headers: { "Content-Type": "application/json"},
+                    body: JSON.stringify(new_contact)
+                })
+                console.log(new_contact) // Is logging
+                const {Nome, Cognome, Email } = new_contact;
+                console.log(new_contact, 'is type of', typeof new_contact, 'and has: ', Nome, Cognome, Email)
+                // Debugging
+                for(let dato in new_contact){
+                    console.log(dato, 'is type of ', typeof dato)
+                };
+                for (const [key, value] of Object.entries(new_contact)) {
+                    console.log(`${key}: ${value}`);
+                };
+                navigate("/contatti"); 
+             
+            });  
+    
+            },
+        []);
+
+
+    //  ----- [1] the HTML body mounts first -----
     return ( 
         <> 
             <h1>Modifica contatto</h1>
-            <form onSubmit={handleUpdate}>
+            <form 
+                id='form'
+               //  onSubmit={handleUpdate}
+                >
                 <label htmlFor='new-name'>Nome</label>
                 <input 
                     id='new-name' 
@@ -84,7 +129,11 @@ const Update = () => {
                     value={newEmail} 
                     onChange={e => setNewEmail(e.target.value)}
                 />
-                <button type='submit'>Salva</button>
+                <button 
+                    type='submit'   
+                >
+                Salva
+                </button>
             </form>
         </>
     )

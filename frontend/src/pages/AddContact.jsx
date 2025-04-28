@@ -1,7 +1,10 @@
 import React, {useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import '../styles/App.css';
 
 const AddContact = ()=> {
+    // use react routing to navigate to /contacts route
+    const navigate = useNavigate();
     // Use thew useEffect to access DOM elements by id
     useEffect(()=>{
         // take the form and each form's input by id
@@ -49,12 +52,10 @@ const AddContact = ()=> {
             };
             for (const [key, value] of Object.entries(new_contact)) {
                 console.log(`${key}: ${value}`);
-            }
-
-            // Add something to hook to the new contact id and display it in a dynamic separate route
-            
-            
-        });  
+            } 
+            // navigate back to " /contacts " route
+            navigate("/contatti")
+        }); 
 
         },
     []);
