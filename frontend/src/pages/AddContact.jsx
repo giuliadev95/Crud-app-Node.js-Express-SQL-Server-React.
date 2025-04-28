@@ -55,6 +55,11 @@ const AddContact = ()=> {
             } 
             // navigate back to " /contacts " route
             navigate("/contatti")
+            fetch('http://localhost:5000/api/', { 
+                method: 'GET',
+                headers: { "Content-Type": "application/json"}
+            })
+
         }); 
 
         },

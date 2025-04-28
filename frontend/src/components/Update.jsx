@@ -94,7 +94,7 @@ const Update = () => {
                 for (const [key, value] of Object.entries(new_contact)) {
                     console.log(`${key}: ${value}`);
                 };
-                navigate("/contatti"); 
+                navigate("/contatti");   
              
             });  
     
