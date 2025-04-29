@@ -19,6 +19,7 @@ const Update = () => {
         .then ( (response) => {
             // logs an Array of 1 Object
             console.log(response.data[0]); 
+            // response data is now passed into the contact variable
             setContact(response.data[0]);
             // logs the first and unique Object of the response.data Array
             //console.log(contact); => not logging anithing but a void object
