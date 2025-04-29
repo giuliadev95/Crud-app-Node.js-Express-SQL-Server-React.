@@ -11,17 +11,17 @@ const Update = () => {
     const [newName, setNewname] = useState("");
     const [newSurname, setNewSurname] = useState("");
     const [newEmail, setNewEmail] = useState("");
-    
+   
     // ---- [2] fetch single contact's data right after the DOM has mounted ----
     useEffect(() => {   
         axios
         .get(`http://localhost:5000/api/${id}`)
         .then ( (response) => {
             // logs an Array of 1 Object
-           // console.log(response.data[0]); 
+            console.log(response.data[0]); 
             setContact(response.data[0]);
             // logs the first and unique Object of the response.data Array
-           // console.log(contact);
+            //console.log(contact); => not logging anithing but a void object
         })
         .catch(error => console.log(`Error fetching the contact's data: ${error}`));
     }, [id]) 

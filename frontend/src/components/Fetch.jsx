@@ -107,7 +107,6 @@ const Fetch = () => {
                                 onClick={ ()=> openContactPage(contact.Id) } // with the onClick() function, this delete function gets executed after the fetching of the contacts
                                 >
                                 <FaPen/>
-
                                 </button>         
                             </td>      
                         </tr>
