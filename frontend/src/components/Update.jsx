@@ -116,6 +116,7 @@ const Update = () => {
                     id='new-name' 
                     value = {newName}
                     onChange={e => setNewname(e.target.value)}
+                    placeholder={contact.Nome}
                 />
                 <label htmlFor='new-surname'>Cognome</label>
                 <input 
