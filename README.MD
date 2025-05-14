@@ -54,33 +54,31 @@ After my work to add a database, API and a frontend, this final webapp has becom
 
 
 ### Structure
+```
 .
 ├── backend/
 │   ├── config/
-│       └── db.js = database configuration 
+│   │   └── db.js                 # Database configuration
 │   ├── controller/
-│       └── users.js = API REST to perform the CRUD actions
-│   └── node_modules/
+│   │   └── users.js              # API REST to perform CRUD actions
+│   ├── node_modules/
 │   ├── routes/
-│       └── users.js = routes fo the REST API
+│   │   └── users.js              # Routes for the REST API
 │   ├── .gitignore
-│   │   
-│   ├── README.md = this README.md file
-│   │  
-│   ├── index.js = starts the server and defines its configuration
+│   ├── README.md                 # This README.md file
+│   ├── index.js                  # Starts the server and defines its configuration
 │   ├── package.json
-│   ├── package-lock.json
-|   .
-│ 
+│   └── package-lock.json
+│
 ├── frontend/
 │   ├── src/
-│   |   └── components/ = all .jsx React components that make the webapp
-|   |    └── pages/ = the 3 pages (or 'routes') of the webapp: home, contacts, add contact (the add form)
-|   |    └── styles/ = the styles for the webapp
+│   │   ├── components/           # All .jsx React components that make the webapp
+│   │   ├── pages/                # The 3 pages (routes): home, contacts, add contact (form)
+│   │   └── styles/               # Styles for the webapp
 │   ├── .gitignore
-│   └── eslint.config.js
+│   ├── eslint.config.js
 │   ├── index.html
-│   ├── package-lock.json  
-│   ├── package.json 
-│   ├── vite.config.js
-.
+│   ├── package.json
+│   ├── package-lock.json
+│   └── vite.config.js
+```
