@@ -44,13 +44,19 @@ After my work to add a database, API and a frontend, this final webapp has becom
     - A more organized (and rich) structure, divided in backend and frontend to keep the codebase clean and clearer to consult.
         - Backend: 
             - Connect to a real online SQL Server database, hosted on Azure, to host all contacts.
+            - REST API 
             - Perform CRUD operations to :
             - get all contacts displayed in a table
             - update a contact by clicking a 'modify' icon that opens a specific form to do all the modifications
             - delete a contact by clicking a 'delete' icon
             - filter the contacts list in a proper 'search field', to find the one or the ones that match your search.
 
-        - Frontend: a React clean frontend, dynamic thanks to the useState and useEffect hooks.
+        - Frontend: 
+            - react router
+            - useState hook to update input forms and the contacts list
+            - useEffect hook to execute actions after the dom has mounted or after a contact's state has updated
+            - fetch() API to fetch contacts and from the server's internal endopoint
+                - in alternative, axios library for the fetch
 
 
 ### Structure
