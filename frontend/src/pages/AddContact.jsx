@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/App.css';
 
@@ -72,7 +72,7 @@ const AddContact = ()=> {
                 <input type='text' name='nome' placeholder='Nome' required id="nome"/>
                 <input type='text' name='cognome' placeholder='Cognome' required id="cognome"/>
                 <input type='text' name='email' placeholder='Email' required id="email"/>
-                <button type="submit">Aggiungi</button>
+                <button type="submit" class='add'>Aggiungi</button>
             </form>
         </>
     )

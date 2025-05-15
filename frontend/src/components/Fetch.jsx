@@ -73,7 +73,7 @@ const Fetch = () => {
             class="add-new-contact"
             onClick={ ()=> openForm()}
             >
-            Aggiungi +
+            + Nuovo
         </button>
         </div>
         {/** 2 */}
@@ -90,7 +90,7 @@ const Fetch = () => {
                 {filteredContacts.length > 0 ? (
                     filteredContacts.map((contact) => (  
                         <tr key={contact.Id}>
-                            <th scope="row"> {contact.Nome}</th>
+                            <td> {contact.Nome}</td>
                             <td>{contact.Cognome}</td>
                             <td>{contact.Email}</td>
                             <td class="update-delete-btn-container">     {/** 2 */}

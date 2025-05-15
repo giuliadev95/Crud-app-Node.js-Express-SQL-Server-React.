@@ -12,10 +12,17 @@ a {
 form {
   display:flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
 
-input{ margin-bottom:2px;}
+input{ 
+  margin-bottom:2px;
+  height: 1rem;
+  font-size: .8rem;
+  background-color: white;
+  color: black;
+  font-weight: 500;
+}
 
 button {
   width: 70px;
@@ -50,14 +57,23 @@ table {
 
 
 thead {
-  background-color: #263646;
+  background-color: #e6ebf1;
+  color: black;
+  font-weight: 700;
 }
 
-th,
+th {
+  border: 1px solid rgb(63, 78, 93);
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 700;
+}
+
 td {
   border: 1px solid rgb(63, 78, 93);
   padding: 8px 10px;
   text-align: left;
+  font-weight: 400;
 }
 
 .update-delete-btn-container {

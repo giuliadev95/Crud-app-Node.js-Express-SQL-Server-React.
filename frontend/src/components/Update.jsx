@@ -123,12 +123,14 @@ const Update = () => {
                     id='new-surname' 
                     value={newSurname} 
                     onChange={e => setNewSurname(e.target.value)}
+                    placeholder={contact.Cognome}
                 />
                 <label htmlFor='new-email'>Email</label>
                 <input 
                     id='new-email' 
                     value={newEmail} 
                     onChange={e => setNewEmail(e.target.value)}
+                    placeholder={contact.Email}
                 />
                 <button 
                     type='submit'   
